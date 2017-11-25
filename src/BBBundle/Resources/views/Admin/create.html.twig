@@ -1,0 +1,60 @@
+{% extends '@BB/n2_admin.html.twig' %}
+{% block n3 %}
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="well well-lg">
+            <a class="glyphicon glyphicon-arrow-left" href="{{ path('bb_homepage' )}}"></a>
+            <a class="glyphicon glyphicon-log-out pull-right" href="{{ path('fos_user_security_logout') }}"></a>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="signin_space">
+            <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 create_form_container">
+
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+
+
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+    {% for comment in comments %}
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 div_for_allow_coms">
+
+                <div>
+                    <div><strong>{{ comment.pseudo | upper}}</strong></div>
+                    <div class="wrap_comm"><p>{{ comment.message }}</p></div>
+                    <div>{{ comment.createdAt | date('d/m/Y H:i')}}</div>
+                </div>
+
+                <div>
+                    <button class="btn btn-danger"><a href="{{ path('bb_admin_delete',{'id':comment.id}) }}">Supprimer</a></button>
+                    <button class="btn btn-success"><a href="{{ path('bb_admin_allow',{'id':comment.id}) }}">Autoriser</a></button>
+                </div>
+                <div>
+                    <div><strong>{{ comment.draw.title | upper}}</strong></div>
+                    <div><span>draw id:</span>{{ comment.draw.id}}</div>
+                    <div>{{ comment.draw.createdAt | date('d/m/Y H:i') }}</div>
+                </div>
+
+
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
+{% endblock n3 %}
+
+

@@ -1,0 +1,86 @@
+{% extends '@BB/n2.html.twig' %}
+{% block n3 %}
+
+    {#<div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header"></div>
+        </div>
+    </div>
+        </div>
+    </div>#}
+    {#banniere image#}
+    <div class="row">
+        <div class="col-sm-12">
+            {#<div class="thumbnail">#}
+            <img class="img-thumbnail ban_image" src="{{ asset('bundles/bb/ban/ban.png') }}" alt="banniere">
+            {#</div>#}
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well well-lg">
+                <a href="{{ path('bb_doodle') }}"><strong>DOODLES</strong></a>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <span><a class="glyphicon glyphicon-user pull-right" href="{{ path('bb_admin_create') }}"></a></span>
+                <span><a class="glyphicon glyphicon-log-out pull-right" href="{{ path('fos_user_security_logout') }}"></a></span>
+                {% else %}
+                        <span><a class="glyphicon glyphicon-user pull-right" href="{{ path('bb_admin_homepage') }}"></a></span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {#les articles et boucle foreach #}
+
+    {% for dra in draws | reverse %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar  menuart navbar-inverse" role="navigation">
+                    {{ dra.title }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well barrart well-sm elements_post">
+                    {#{% include '@BB/Default/Partials/coeur.html.twig' %}#}
+                    <a data-id="{{ dra.id }}" data-pouce="{{ dra.pouces }}" class="glyphicon glyphicon-thumbs-up coeur" href="{{ path('bb_pouces_up',{'id':dra.id}) }}"></a>
+                    {#{% include '@BB/Default/Partials/thumbs.html.twig' %}#}
+                    <span data-id="{{ dra.id }}" class="countPouces"></span>
+                    <span class="created_at">{{ dra.createdAt | date('d/m/Y H:m') }}</span>
+                    <a class="glyphicon glyphicon-comment com " href="{{ path('bb_singlepost',{'id':dra.id}) }}"
+                       title="avec .fadeIn si possible"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {% if dra.picture is empty %}
+                    <div class="descr">
+                        <p>{{ dra.description }}</p>
+                    </div>
+                {% endif %}
+                {% for pic in dra.picture %}
+                    <a href="{{ path('bb_singlepost',{'id':dra.id}) }}"><img title="{{ dra.description }}"
+                                                                             class="img-thumbnail post"
+                                                                             src="/{{ pic.dPath }}" alt="dessin"></a>
+                {% endfor %}
+
+            </div>
+
+
+        </div>
+    {% endfor %}
+
+    <div id="toTop"></div>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            {#<p class="text-muted">Place sticky footer content here.</p>#}
+        </div>
+    </footer>
+{% endblock n3 %}

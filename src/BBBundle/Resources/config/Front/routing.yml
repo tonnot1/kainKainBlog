@@ -1,0 +1,30 @@
+bb_homepage:
+    path:     /
+    defaults: { _controller: BBBundle:Default:index }
+
+bb_singlepost:
+    path:     /post/{id}
+    defaults: { _controller: BBBundle:Default:postsingle }
+    requirements:
+      id: \d+
+
+bb_doodle:
+    path:     /doodle
+    defaults: { _controller: BBBundle:Default:doodle }
+
+bb_sing_doodle:
+    path:     /doodle/{id}
+    defaults: { _controller: BBBundle:Default:singleDoodle }
+
+bb_pouces_up:
+    path:     /pouceup/{id}
+    defaults: {_controller: BBBundle:Default:getUpPouces, id: id}
+    options:
+            expose: true
+
+bb_ajax_pouces:
+    path:     /refresh/thumbs/draw/{id}
+    defaults: {_controller: BBBundle:Default:getPouces, id: id}
+    options:
+            expose: true
+

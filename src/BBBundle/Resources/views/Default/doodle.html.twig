@@ -1,0 +1,60 @@
+{% extends 'BBBundle::n2.html.twig' %}
+{% block n3 %}
+
+    <div class="gogo"></div>
+
+    <div class="row doodle_haut_page"></div>
+
+    <div class="row">
+<div class="col-xs-1"></div>
+<div class="col-xs-10">
+    <div class="grid text-center">
+
+    {#<div class="grid-sizer"></div>#}
+    {% for doo in draw %}
+        {% for pic in doo.picture %}
+    <div class="grid-item">
+        <img src="/{{ pic.dPath }}" alt="doodle">
+    </div>
+         {% endfor %}
+     {% endfor %}
+
+
+    <div class="grid-item grid-item--width2 grid-item--height0"></div>
+    <div class="grid-item grid-item--height2">
+        <img src="{{ asset('bundles/bb/postimage/Starry.jpg') }}" alt="doodle">
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height0"></div>
+    <div class="grid-item grid-item--width2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height0"></div>
+    <div class="grid-item grid-item--height2 "></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--width2 grid-item--height0"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2">
+        <img src="{{ asset('bundles/bb/postimage/The-Birth-of-Venus-Painting.jpg') }}" alt="doodle">
+    </div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item grid-item--height0"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--width2 grid-item--height0"></div>
+    <div class="grid-item grid-item--width2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item grid-item--height0"></div>
+    <div class="grid-item"></div>
+
+</div>
+</div>
+<div class="col-xs-1"></div>
+</div>
+
+
+
+{% endblock n3 %}

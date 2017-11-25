@@ -1,0 +1,7 @@
+bb_front:
+    resource: "@BBBundle/Resources/config/Front/routing.yml"
+    prefix: "/"
+
+bb_admin:
+    resource: "@BBBundle/Resources/config/Admin/routing.yml"
+    prefix: "/admin"

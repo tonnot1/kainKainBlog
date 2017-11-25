@@ -1,0 +1,70 @@
+<?php
+
+namespace BBBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Picture
+ *
+ * @ORM\Table(name="picture")
+ * @ORM\Entity(repositoryClass="BBBundle\Repository\PictureRepository")
+ */
+class Picture
+{
+    /**
+     * @ORM\OneToOne(targetEntity="BBBundle\Entity\Draw", mappedBy="picture")
+     */
+    private $draw;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dPath", type="string", length=255)
+     */
+    private $dPath;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dPath
+     *
+     * @param string $dPath
+     *
+     * @return Picture
+     */
+    public function setDPath($dPath)
+    {
+        $this->dPath = $dPath;
+
+        return $this;
+    }
+
+    /**
+     * Get dPath
+     *
+     * @return string
+     */
+    public function getDPath()
+    {
+        return $this->dPath;
+    }
+}
+

@@ -1,0 +1,19 @@
+bb_admin_homepage:
+    path:     /
+    defaults: { _controller: BBBundle:Admin:indexAdmin }
+
+bb_admin_create:
+    path:     /create
+    defaults: { _controller: BBBundle:Admin:publish }
+
+bb_admin_allow:
+    path:     /push/online/{id}
+    defaults: { _controller: BBBundle:Admin:allowComment }
+    requirements:
+      id: \d+
+
+bb_admin_delete:
+    path:     /delete/{id}
+    defaults: { _controller: BBBundle:Admin:deleteCom }
+    requirements:
+      id: \d+
