@@ -9,6 +9,7 @@ imports:
 parameters:
     locale: fr
     draws_directory: '%kernel.project_dir%/web/uploads/draws'
+    paints_directory: '%kernel.project_dir%/web/uploads/paints'
 
 framework:
     #esi: ~
@@ -37,6 +38,10 @@ framework:
 
 # Twig Configuration
 twig:
+    paths:
+        '%kernel.project_dir%/src/BBBundle/Resources/views': FOSUser
+        '%kernel.project_dir%/vendor/friendsofsymfony/user-bundle/Resources/views': FOSUser
+    form_themes: ['bootstrap_3_layout.html.twig']
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 

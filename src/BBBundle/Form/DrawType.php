@@ -25,9 +25,9 @@ class DrawType extends AbstractType
             ->add('description',TextareaType::class,array('label'=>'Description','attr'=>array('class'=>'form-control','type'=>'textarea')))
             //->add('createdAt' )
             //->add('updatedAt')
-            ->add('picture', FileType::class)
-            ->add('category', EntityType::class, array('class'=>'BBBundle\Entity\Category','choice_label'=>'name','label'=>'Catégorie', 'attr'=>array('class'=>'form-control')))//Entitytype
-            ->add('valider', SubmitType::class, array('attr'=>array('class'=>'btn btn-default navbar-right')));
+//            ->add('picture', FileType::class)
+//            ->add('category', EntityType::class, array('class'=>'BBBundle\Entity\Category','choice_label'=>'name','label'=>'Catégorie', 'attr'=>array('class'=>'form-control')))//Entitytype
+            ->add('valider', SubmitType::class, array('attr'=>array('class'=>'btn btn-default')));
     }
 
     

@@ -1,0 +1,142 @@
+{% extends '::n1.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/bb/css/painterGift.css') }}">
+{% endblock stylesheets %}
+{% block painter %}
+
+    <div>
+        <div class="row single_post_row">
+            <div class="col-sm-12 nav_single">
+                <div class="welle">
+                    <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+                    <h2 class="pull-right doo_title">Painter area</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row doodle_haut_page single_post_row_doodle"></div>
+
+        <div class="row doodle_haut_page single_post_row_doodle">
+            <div class="col-xs-12 text-center">
+                <p>Venez poster un petit dessin et peut être gagner des lots pour les créations les plus réussies.</p>
+                <p>(L'utilisation de cet outil est conseillée sur un ordinateur)</p>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#outil_paint" style="border-radius: 0">
+                Lancer l'outil
+            </button>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="outil_paint" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog painter-dialog" role="document">
+                <div class="modal-content modal-painter">
+                    <div class="modal-body">
+                        <div class="painter_features">
+                            <button class="undo_stroke"><i class="fa fa-undo"></i></button>
+                            <div class="form">
+                                <select name="form" id="form">
+                                    <option value="0" class="carre">carre</option>
+                                    <option value="50" class="rond">rond</option>
+                                </select>
+                            </div>
+                            <div class="controls">
+                                <select name="taille" id="tselect">
+                                    <option value="1">1px</option>
+                                    <option value="3">3px</option>
+                                    <option value="6">6px</option>
+                                    <option value="9">9px</option>
+                                    <option value="12">12px</option>
+                                    <option value="24">24px</option>
+                                    <option value="48" selected>48px</option>
+                                    <option value="64">64px</option>
+                                    <option value="72">72px</option>
+                                </select>
+
+                            </div>
+                            <input type="color" id="renk" title="pipette à l'intérieur">
+                            <div class="opac">
+                                <select name="opacity" id="opacity">
+                                    <option value="1">très opaque</option>
+                                    <option value="0.5">opaque</option>
+                                    <option value="0.25">peu opaque</option>
+                                    <option value=".1">très peu opaque</option>
+                                </select>
+                            </div>
+                            <button class="outil" value="0"><i class="fa fa-eraser"></i></button>
+                            <button class="outil" value="1"><i class="fa fa-paint-brush"></i></button>
+                            <button class="outil" value="2"><i class="fa fa-trash"></i></button>
+                            <button class="outil" value="4"><i class="fa fa-fill-drip"></i></button>
+
+                            <div class="paint_canvas"></div>
+                        </div>
+                    </div>
+                    <div class="row single_post_row_doodle">
+                        <div class="col-xs-12 painter_features">
+                            <input type="email" placeholder="Email (obligatoire)..." required="required">
+                            <button class="paint_submit">Envoyer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {#<div class="row single_post_row_doodle">#}
+            {#<div class="col-xs-12 painter_features">#}
+                {#<button class="undo_stroke"><i class="fa fa-undo"></i></button>#}
+                {#<div class="form">#}
+                    {#<select name="form" id="form">#}
+                        {#<option value="0" class="carre">carre</option>#}
+                        {#<option value="50" class="rond">rond</option>#}
+                    {#</select>#}
+                {#</div>#}
+                {#<div class="controls">#}
+                    {#<select name="taille" id="tselect">#}
+                        {#<option value="1">1px</option>#}
+                        {#<option value="3">3px</option>#}
+                        {#<option value="6">6px</option>#}
+                        {#<option value="9">9px</option>#}
+                        {#<option value="12">12px</option>#}
+                        {#<option value="24">24px</option>#}
+                        {#<option value="48" selected>48px</option>#}
+                        {#<option value="64">64px</option>#}
+                        {#<option value="72">72px</option>#}
+                    {#</select>#}
+
+                {#</div>#}
+                {#<input type="color" id="renk" title="pipette à l'intérieur">#}
+                {#<div class="opac">#}
+                    {#<select name="opacity" id="opacity">#}
+                        {#<option value="1">très opaque</option>#}
+                        {#<option value="0.5">opaque</option>#}
+                        {#<option value="0.25">peu opaque</option>#}
+                        {#<option value=".1">très peu opaque</option>#}
+                    {#</select>#}
+                {#</div>#}
+                {#<button class="outil" value="0"><i class="fa fa-eraser"></i></button>#}
+                {#<button class="outil" value="1"><i class="fa fa-paint-brush"></i></button>#}
+                {#<button class="outil" value="2"><i class="fa fa-trash"></i></button>#}
+                {#<button class="outil" value="4"><i class="fa fa-fill-drip"></i></button>#}
+
+                {#<div class="paint_canvas"></div>#}
+            {#</div>#}
+        {#</div>#}
+        {#<div class="row single_post_row_doodle">#}
+            {#<div class="col-xs-12 painter_features">#}
+                {#<input type="email" placeholder="Email (obligatoire)..." required="required">#}
+                {#<button class="paint_submit">Envoyer</button>#}
+            {#</div>#}
+        {#</div>#}
+    </div>
+
+{% endblock painter %}
+
+{% block javascript  %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/bb/js/painterGift.js') }}"></script>
+{% endblock javascript %}

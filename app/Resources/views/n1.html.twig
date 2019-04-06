@@ -4,43 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Blog de Kainkain">
+    <meta name="author" content="YIGIT Tamer">
     <link rel="icon" href="favicon.ico">
 
     <title>kainkain</title>
 
+    {#<script type="text/javascript" src="{{ asset('bundles/bb/js/jquery-3.2.1.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('bundles/bb/js/bb.js') }}"></script>#}
+    {#<script type="text/javascript" src="{{ asset('bundles/bb/js/app.js') }}"></script>#}
+
     {% block stylesheets %}
     <!-- Bootstrap core CSS -->
+    <link href="{{ asset('bundles/bb/css/css/all.css') }}" rel="stylesheet">
     <link href="{{ asset('bundles/bb/css/bootstrap.css') }}" rel="stylesheet">
-
-    {#<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="{{ asset('bun') }}" rel="stylesheet">#}
-
-    <!-- Custom styles for this template -->
     <link href="{{ asset('bundles/bb/css/bb.css') }}" rel="stylesheet">
 
     {% endblock stylesheets %}
-
-    {#<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->#}
 </head>
 
 <body>
+
+{% block doodle %}{% endblock doodle %}
+{% block contact %}{% endblock contact %}
+{% block satire %}{% endblock satire %}
+{% block painter %}{% endblock painter %}
+
 <div id="container" class="container">
 
-
-{% block n2 %}{% endblock n2 %}
+{% block n3 %}{% endblock n3 %}
 
 {% block javascript %}
+<script src="{{ asset('bundles/bb/js/es6-promise.auto.min.js') }}"></script>
+<script src="{{ asset('bundles/bb/js/html2canvas.js') }}"></script>
+
 <script type="text/javascript" src="{{ asset('bundles/bb/js/jquery-3.2.1.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/bb/js/bb.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/bb/js/app.js') }}"></script>
@@ -54,9 +51,7 @@
 
 {% endblock javascript %}
 
-
 </div>
-
 
 </body>
 </html>

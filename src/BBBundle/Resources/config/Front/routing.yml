@@ -1,6 +1,12 @@
 bb_homepage:
-    path:     /
-    defaults: { _controller: BBBundle:Default:index }
+    path:     /{page}
+    defaults: { _controller: BBBundle:Default:index, page: 1 }
+    requirements:
+      page: \d+
+
+bb_draws_date:
+    path:     /post/date/{date}
+    defaults: { _controller: BBBundle:Default:drawsDate }
 
 bb_singlepost:
     path:     /post/{id}
@@ -8,13 +14,23 @@ bb_singlepost:
     requirements:
       id: \d+
 
+bb_load_comments:
+    path:     /comments/post/{drawId}
+    defaults: { _controller: BBBundle:Default:loadComments}
+    options:
+            expose: true
+
 bb_doodle:
     path:     /doodle
     defaults: { _controller: BBBundle:Default:doodle }
 
-bb_sing_doodle:
-    path:     /doodle/{id}
-    defaults: { _controller: BBBundle:Default:singleDoodle }
+bb_satire:
+    path:     /satire
+    defaults: { _controller: BBBundle:Default:satire }
+
+bb_illustrations:
+    path:     /illustration
+    defaults: { _controller: BBBundle:Default:illustration }
 
 bb_pouces_up:
     path:     /pouceup/{id}
@@ -28,3 +44,25 @@ bb_ajax_pouces:
     options:
             expose: true
 
+bb_contact:
+    path: /contact
+    defaults: {_controller: BBBundle:Default:contact}
+
+#paint
+bb_painter:
+    path: /painter
+    defaults: {_controller: BBBundle:Concours:index}
+
+bb_download_paint:
+    path: /download/painter
+    defaults: {_controller: BBBundle:Concours:downloadPaint}
+    options:
+            expose: true
+
+bb_winner_mail:
+    path: /winner/mailing/{email}
+    defaults: {_controller: BBBundle:Concours:winnerMail}
+
+bb_validate_winner:
+    path: /validation/winner/{id}
+    defaults: {_controller: BBBundle:Concours:winnerValidation}

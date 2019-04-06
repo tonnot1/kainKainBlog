@@ -1,0 +1,54 @@
+{% extends '::n1.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/bb/css/satire.css') }}">
+{% endblock stylesheets %}
+{% block satire %}
+
+    <div>
+        <div class="row single_post_row">
+            <div class="col-sm-12 nav_single">
+                <div class="welle">
+                    <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+                    <h2 class="pull-right satire_title">CARICATURES</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row doodle_haut_page single_post_row_doodle"></div>
+
+        <div class="row single_post_row_doodle">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-10">
+                <div class="grid text-center">
+                    {% for sat in draw %}
+                        {% for pic in sat.picture %}
+                            <div class="grid-item " role="dialog" data-toggle="modal" data-target="#myModal{{ sat.id }}">
+                                <img src="../{{ pic.dPath }}" alt="doodle">
+                                <div class="satire_title_bandeau">
+                                    <span>{{ sat.title }}</span>
+                                    <span data-id="{{ sat.id }}" data-pouce="{{ sat.pouces }}" class="glyphicon glyphicon-heart coeur pull-right"></span>
+                                    <span data-id="{{ sat.id }}" class="countPouces countPouces{{ sat.id }} pull-right">{{ sat.pouces }}</span>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            <div class="doodle-img-modal modal" id="myModal{{ sat.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <img src="../{{ pic.dPath }}" alt="doodle">
+                                        <a data-id="{{ sat.id }}" data-pouce="{{ sat.pouces }}" class="fa fa-heart coeur" href="{{ path('bb_pouces_up',{'id':sat.id}) }}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+
+    </div>
+
+{% endblock satire %}

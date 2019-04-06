@@ -1,0 +1,22 @@
+{% extends '::n1.html.twig' %}
+
+{% block n3 %}
+
+    <div class="row single_post_row">
+        <div class="col-sm-12 nav_single">
+            <div class="welle">
+                <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row single_post_row">
+        <div class="col-sm-8 col-sm-offset-2">
+        {{ form_start(form_edit) }}
+        {{ form_widget(form_edit) }}
+        {{ form_end(form_edit) }}
+        </div>
+    </div>
+
+{% endblock n3 %}

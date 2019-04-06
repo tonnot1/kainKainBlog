@@ -1,0 +1,42 @@
+{% extends '::n1.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/bb/css/contact.css') }}">
+{% endblock stylesheets %}
+{% block contact %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 nav_single">
+            <div class="welle">
+                <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+                <h2 class="pull-right contact_title"></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row contact_row">
+        <div class="col-sm-8 col-sm-offset-2 post_contact">
+            <img class="masaru" src="{{ asset('bundles/bb/postimage/contact_banniere_fin.png') }}" alt="samourai">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span> A propos <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center div_about">
+            <br>
+            <div class="form_padding">
+                RIEN POUR LE MOMENT...
+            </div>
+            <br>
+        </div>
+    </div>
+    </div>
+
+{% endblock contact %}

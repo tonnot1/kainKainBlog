@@ -1,0 +1,38 @@
+{% extends '@BB/Default/index.html.twig' %}
+
+{% block draws %}
+    {% for dra in dByDate %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar  menuart navbar-inverse" role="navigation">
+                    <p>{{ dra.title }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well barrart well-sm elements_post">
+                    <a data-id="{{ dra.id }}" data-pouce="{{ dra.pouces }}" class="glyphicon glyphicon-thumbs-up coeur" href="{{ path('bb_pouces_up',{'id':dra.id}) }}"></a>
+                    <span data-id="{{ dra.id }}" class="countPouces"></span>
+                    <span class="created_at">{{ dra.createdAt | localizeddate('none', 'none', null, null, "d MMMM Y") }}</span>
+                    <a class="glyphicon glyphicon-comment com " href="{{ path('bb_singlepost',{'id':dra.id}) }}"
+                       title="avec .fadeIn si possible"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {% if dra.picture is empty %}
+                    <div class="descr">
+                        <p>{{ dra.description }}</p>
+                    </div>
+                {% endif %}
+                {% for pic in dra.picture %}
+                    <a href="{{ path('bb_singlepost',{'id':dra.id}) }}"><img title="{{ dra.description }}"
+                                                                             class="img-thumbnail post"
+                                                                             src="../../../{{ pic.dPath }}" alt="dessin"></a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock draws %}

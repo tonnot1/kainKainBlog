@@ -1,105 +1,77 @@
-{% extends '@BB/n2.html.twig' %}
+{% extends '::n1.html.twig' %}
 {% block n3 %}
 
-
-        <div class="row single_header">
-            <div class="col-xs-1"></div>
-
-            <div class="col-xs-8">
-
-            </div>
-            <div class="col-xs-1"></div>
+<div class="row single_post_row">
+    <div class="col-sm-12 nav_single">
+        <div class="welle">
+            <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+            <span class="pull-right single_title">{{ draw.title }}</span>
         </div>
-        <div class="row dessin">
-           {#<div class="col-xs-2"></div>#}
-            <div class="col-xs-12 col-lg-12">
+    </div>
+</div>
+    <div class="row single_post_row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+        <div class="row single_post_row">
+            <div class="col-sm-12 ima">
                 {%for sg in draw.picture%}
-                <img class="img-thumbnail single_post" src="/{{sg.dPath}}" alt="dessin">
+                <img class="img-thumbnail single_post" src="../../{{sg.dPath}}" alt="dessin">
                 {% endfor %}
             </div>
-            {#<div class="col-xs-2"></div>#}
         </div>
-    <div class="row">
-        <div class="col-xs-6 col-lg-offset-3 nav_comm">
-            <span>Vos commentaires</span>
+        <div class="row single_post_row">
+             <div class="col-sm-12 nav_comm">
+                 {% if commentsCount == 0 %}
+                 <span>Vos commentaires</span>
+                 {% else %}
+                 <span>Vos commentaires ({{ commentsCount }}) &nbsp</span>
+                 <span class="load_comms"><i class="glyphicon glyphicon-download"></i></span>
+                 {% endif %}
+
+             </div>
         </div>
-    </div>
+         {% if commentsCount == 0 %}
+         <div class="row single_post_row">
+               <div class="col-sm-12 form_bg com_area">
+                      <p>Aucun commentaire pour le moment...</p>
+               </div>
+         </div>
+         {% endif %}
 
-    <div class="row">
+        <div class="comms_container"></div>
 
-        <div class="col-xs-3"></div>
-        <div class="col-xs-6 form_bg">
-
-            {% if comments is empty %}
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="jumbotron">
-                            <p>Aucun commentaire pour le moment...</p>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-
-
-
-            {% for comment in comments %}
-            <div class="row">
-                <div class="col-xs-12 head_com">
-                    {#<div class="">#}
-                        <span>{{ comment.pseudo | upper }}</span>
-                        <span>{{ comment.createdAt | date('d/m/Y H:i') }}</span>
-                    {#</div>#}
-                </div>
+        <div class="row single_post_row">
+            <div class="col-sm-12 text-center slide_comments">
+              <span class="glyphicon glyphicon-triangle-bottom"></span> Laissez un commentaire <span class="glyphicon glyphicon-triangle-bottom"></span>
             </div>
-            <div class="row">
-                <div class="col-xs-1"></div>
-                <div class="col-xs-10">
-                    <div class="jumbotron ">
-                        <div>
-                            <p>{{ comment.message }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-1"></div>
-            </div>
-             {% endfor %}
-            <div class="row">
-                <div class="col-xs-10 col-xs-offset-1">
-                    <hr>
-                </div>
-            </div>
-
-
         </div>
-        <div class="col-xs-3"></div>
-    </div>
-
-
-
-
-
-
-        <div class="row">
-
-        <div class="col-xs-3"></div>
-            <div class="col-xs-6 form_bg">
-                <h2>Laissez un commentaire !</h2>
+        <div class="row commentaire_carre comments">
+            <div class="col-sm-12 text-center">
                 <br>
+                <div class="form_padding">
                 {{ form_start(form_com) }}
                 {{ form_widget(form_com) }}
                 {{ form_end(form_com) }}
-
+                </div>
             </div>
-    <div class="col-xs-3"></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-1"></div>
-
-            <div class="col-xs-8">
-
-            </div>
-            <div class="col-xs-1"></div>
         </div>
 
+    <div id="toTop"></div>
+
+    <script>
+        var idDraw = {{ draw.id | json_encode | raw }};
+    </script>
 
 {% endblock n3 %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/bb/js/signlePost.js') }}"></script>
+{% endblock javascript %}

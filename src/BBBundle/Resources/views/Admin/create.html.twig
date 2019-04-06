@@ -1,60 +1,123 @@
-{% extends '@BB/n2_admin.html.twig' %}
+{% extends '::n1.html.twig' %}
 {% block n3 %}
 
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <div class="well well-lg">
-            <a class="glyphicon glyphicon-arrow-left" href="{{ path('bb_homepage' )}}"></a>
-            <a class="glyphicon glyphicon-log-out pull-right" href="{{ path('fos_user_security_logout') }}"></a>
+<div class="row single_post_row">
+    <div class="col-sm-12 welle">
+            <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage' )}}"></a>
+            <a class="glyphicon glyphicon-log-out pull-right logout-a" href="{{ path('fos_user_security_logout') }}"></a>
 
-        </div>
     </div>
 </div>
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span> Contacts <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
+    <div class="row contact_content single_post_row comments">
+        <div class="col-sm-12 contact_bg com_area text-center">
+            <p><a href="">Lien vers la messagerie</a></p>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <div class="signin_space">
-            <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 create_form_container">
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span> Visites <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
+    <div class="row comments text-center single_post_row">
+        <div class="col-sm-3 visite_area"><span class="visit_title">Visites totales:</span><span class="visit_data"> {{ ips|length }}</span></div>
+        <div class="col-sm-3 visite_area"><span class="visit_title">Visites uniques:</span><span class="visit_data"> {{ ipsDistinct|length }}</span></div>
+        <div class="col-sm-3 visite_area"><span class="visit_title">Visites au mois:</span><span class="visit_data"> {{ ipsMonth|length }}</span></div>
+        <div class="col-sm-3 visite_area"><span class="visit_title">Visites à la semaine:</span><span class="visit_data"> {{ ipsWeek|length }}</span></div>
+    </div>
 
+    <div class="row single_post_row">
+        <div class="col-sm-12 signin_space">
                 {{ form_start(form) }}
                 {{ form_widget(form) }}
                 {{ form_end(form) }}
-
-
-            </div>
-        </div>
         </div>
     </div>
-</div>
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span>  Commentaire(s) à confirmer: <strong>{{ comments | length }}</strong>  <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
+    <div class="row comments single_post_row">
     {% for comment in comments %}
-        <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 div_for_allow_coms">
-
+            <div class="col-sm-12 div_for_allow_coms">
                 <div>
                     <div><strong>{{ comment.pseudo | upper}}</strong></div>
+                    <div><strong>{{ comment.email }}</strong></div>
                     <div class="wrap_comm"><p>{{ comment.message }}</p></div>
                     <div>{{ comment.createdAt | date('d/m/Y H:i')}}</div>
                 </div>
-
                 <div>
-                    <button class="btn btn-danger"><a href="{{ path('bb_admin_delete',{'id':comment.id}) }}">Supprimer</a></button>
-                    <button class="btn btn-success"><a href="{{ path('bb_admin_allow',{'id':comment.id}) }}">Autoriser</a></button>
+                    <a class="btn btn-danger" href="{{ path('bb_admin_delete',{'id':comment.id}) }}">Supprimer</a>
+                    <a class="btn btn-success" href="{{ path('bb_admin_allow',{'id':comment.id}) }}">Autoriser</a>
                 </div>
                 <div>
                     <div><strong>{{ comment.draw.title | upper}}</strong></div>
                     <div><span>draw id:</span>{{ comment.draw.id}}</div>
-                    <div>{{ comment.draw.createdAt | date('d/m/Y H:i') }}</div>
                 </div>
-
-
             </div>
+    {% endfor %}
+    </div>
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span>  Liste des posts  <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
+    <div class="row comments single_post_row">
+    {% for draw in draws | reverse %}
+        <div class="col-sm-12 div_for_allow_coms">
+            <span><strong>{{ draw.title }}</strong></span>
+            <div class="pull-right"><a href="{{ path('bb_admin_remove',{id: draw.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></div>
+            <div class="pull-right"><a href="{{ path('bb_admin_edit',{id: draw.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a></div>
         </div>
     {% endfor %}
+    </div>
 
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span>  Liste des doodles  <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
 
+    <div class="row comments single_post_row">
+        {% for doo in doodles | reverse %}
+            <div class="col-sm-12 div_for_allow_coms">
+                <span><strong>{{ doo.title }}</strong></span>
+                <div class="pull-right"><a href="{{ path('bb_admin_remove',{id: doo.id}) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></div>
+                <div class="pull-right"><a href="{{ path('bb_admin_edit',{id: doo.id}) }}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a></div>
+            </div>
+        {% endfor %}
+    </div>
 
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center slide_comments">
+            <span class="glyphicon glyphicon-triangle-bottom"></span>  Dessins du mois  <span class="glyphicon glyphicon-triangle-bottom"></span>
+        </div>
+    </div>
 
+    <div class="row comments single_post_row visitors-paints">
+        {% for paint in visitorPaints %}
+            <div class="col-xs-6 paint_div text-center">
+                <p><strong>{{ paint.email }}</strong></p>
+                <div class="pull-right"><a href="{{ path('bb_winner_mail',{email: paint.email}) }}" class="btn btn-danger"><span class="fa fa-heart"></span></a></div>
+                <img src="{{ asset(paint.path) }}" data-toggle="modal" data-target="#paint_{{ paint.id }}">
+
+                <!-- Modal -->
+                <div class="modal" id="paint_{{ paint.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img src="{{ asset(paint.path) }}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock n3 %}
-
-

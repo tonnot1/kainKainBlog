@@ -1,4 +1,31 @@
+PreReady = (function () {
+    var navRubriquesMin;
+
+    function init() {
+        navRubriquesMin = $('#bs-example-navbar-collapse-1')
+    }
+    function hide() {
+        navRubriquesMin.hide()
+    }
+    function slide() {
+        navRubriquesMin.slideToggle()
+    }
+
+    return {
+        init: init,
+        hide: hide,
+        slide: slide
+    }
+})();
+
 $(document).ready(function(){
+
+    PreReady.init();
+    // PreReady.hide();
+    $('.comments').hide();
+    $('.slide_comments').click(function () {
+        $(this).parent().next().slideToggle();
+    });
 
     $("<div class='toTop glyphicon glyphicon-collapse-up'></div>").appendTo($('div#toTop')).hide();
     $(window).scroll(function(){
@@ -8,7 +35,6 @@ $(document).ready(function(){
         }else{
             $('div.toTop').fadeOut('slow');
         }
-
     });
 
     $('div.toTop').click(function(){
@@ -22,7 +48,6 @@ $(document).ready(function(){
     }
 
     $('div.toTop').css({
-
         "width":"100%",
         "height":"100%",
         "text-align":"center",
@@ -31,14 +56,7 @@ $(document).ready(function(){
         "cursor":"pointer"
     });
 
-    $('#commentaire').hide();
-
-    $('.com').click(function () {
-        $('#commentaire').fadeToggle(100);
-    });
-
     var coeur = $('.coeur');
-
     var id = coeur.data('id');
     coeur.each(function () {
         var th = $(this);
@@ -52,6 +70,7 @@ $(document).ready(function(){
         e.preventDefault();
         var id = $(this).data('id');
         var t = $(this);
+        var idClass = '.countPouces' + id;
         $.ajax({
             type: 'POST',
             url: Routing.generate('bb_pouces_up',{id:id}),
@@ -59,9 +78,10 @@ $(document).ready(function(){
             async: true,
             success: function (data) {
                 t.next().html(data.pouce[0].pouces);
+                $(idClass).html(data.pouce[0].pouces);
             }
         });
 
         return false;
-    })
+    });
 });

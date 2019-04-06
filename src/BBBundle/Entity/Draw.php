@@ -24,6 +24,11 @@ class Draw
     private $picture;
 
     /**
+     * @ORM\ManyToMany(targetEntity="BBBundle\Entity\Adress", cascade={"persist"})
+     */
+    private $adress;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BBBundle\Entity\Category", inversedBy="draw")
      * @ORM\JoinColumn(name="id_cat", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -82,7 +87,6 @@ class Draw
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
-
 
     /**
      * Get id
@@ -342,5 +346,39 @@ class Draw
     public function getPouces()
     {
         return $this->pouces;
+    }
+
+    /**
+     * Add adress
+     *
+     * @param \BBBundle\Entity\Adress $adress
+     *
+     * @return Draw
+     */
+    public function addAdress(\BBBundle\Entity\Adress $adress)
+    {
+        $this->adress[] = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Remove adress
+     *
+     * @param \BBBundle\Entity\Adress $adress
+     */
+    public function removeAdress(\BBBundle\Entity\Adress $adress)
+    {
+        $this->adress->removeElement($adress);
+    }
+
+    /**
+     * Get adress
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAdress()
+    {
+        return $this->adress;
     }
 }

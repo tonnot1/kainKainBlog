@@ -1,0 +1,133 @@
+body{
+    background: #efefef;
+}
+
+html{
+    height: auto;
+}
+
+.doo_title{
+    color: #dadada;
+    margin: 0 30px 0 0;
+    line-height: 40px;
+    font-size: 8px;
+}
+
+.doodle_title_bandeau{
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    width: 100%;
+    height: 25px;
+    z-index: 2;
+    opacity: 0.75;
+    color: #dadada;
+    margin: auto 0;
+
+}
+
+.doodle-img-modal img {
+    width: 100%;
+}
+
+.grid.text-center {
+    height: 100vh!important;
+}
+
+.single_post_row_doodle {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.discart-doodle {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 1049;
+}
+
+.modal-backdrop.in {
+    opacity: 0.8;
+}
+
+.nav_single {
+    padding: 0;
+}
+
+.grid:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.grid-item {
+    float: left;
+    width: 24%;
+    background-color: #171E26;
+    margin-bottom: 4px;
+    overflow: hidden; /*Elt interieur depasse n'est pas affiché apres les bords*/
+    cursor: pointer;
+}
+
+.grid-item:hover {
+    background-color: #f0ad4e;
+}
+
+.grid-item img {
+    width: 100%;
+    display: block;
+}
+
+.grid-item--height2 {
+    height: 400px;
+}
+
+.grid-item--height0 {
+    height: 140px;
+}
+
+.doodle_haut_page {
+    height: 30px;
+}
+
+.grid-item--gigante {
+    width: auto;
+    height: auto;
+}
+
+.grid-item--gigante img {
+    height: auto;
+    width: 100%;
+}
+
+.grid-item:hover {
+    background: #10ffa5;
+    cursor: hand;
+}
+
+.item_clicked {
+    width: 100%;
+    display: block;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #4e667f;
+    border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #171E26;
+}

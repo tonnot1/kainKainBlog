@@ -1,62 +1,113 @@
-{% extends '@BB/n2.html.twig' %}
+{% extends '::n1.html.twig' %}
 {% block n3 %}
 
-    {#<div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-    <div class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <div class="navbar-header"></div>
-        </div>
-    </div>
-        </div>
-    </div>#}
-    {#banniere image#}
-    <div class="row">
-        <div class="col-sm-12">
-            {#<div class="thumbnail">#}
-            <img class="img-thumbnail ban_image" src="{{ asset('bundles/bb/ban/ban.png') }}" alt="banniere">
-            {#</div>#}
+        <nav class="navbar navbar-dark bg-dark nav-cont">
 
+        <div class="col-xs-1 general_nav navbar-collapse min-rubriques">
+            <a class="glyphicon glyphicon-th" data-toggle="modal" data-target="#bs-example-navbar-collapse-1"></a>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="well well-lg">
-                <a href="{{ path('bb_doodle') }}"><strong>DOODLES</strong></a>
+
+        <div class="col-xs-6 general_nav navbar-collapse nav-rubriques">
+            <a class="general_nav_category" href="{{ path('bb_doodle') }}"><strong style="font-family: 'Marker Felt'">DOODLES</strong></a>
+            <a class="general_nav_category" href="{{ path('bb_satire') }}"><strong style="font-family: 'Marker Felt'">CARICATURES</strong></a>
+            <a class="general_nav_category" href="{{ path('bb_illustrations') }}"><strong style="font-family: 'Marker Felt'">ILLUSTRATIONS/ COVERS</strong></a>
+            <a class="general_nav_category" href="{{ path('bb_painter') }}"><span><i class="fa fa-paint-brush"></i></span></a>
+        </div>
+
+            <div class="col-xs-3 general_nav pull-right navbar-collapse">
                 {% if is_granted("ROLE_ADMIN") %}
-                    <span><a class="glyphicon glyphicon-user pull-right" href="{{ path('bb_admin_create') }}"></a></span>
-                <span><a class="glyphicon glyphicon-log-out pull-right" href="{{ path('fos_user_security_logout') }}"></a></span>
+                    <a class="general_nav_category signin-a-home" href="{{ path('bb_admin_create') }}"><span class="glyphicon glyphicon-user"></span></a>
+                    <a class="general_nav_category logout-a-home" href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span></a>
                 {% else %}
-                        <span><a class="glyphicon glyphicon-user pull-right" href="{{ path('bb_admin_homepage') }}"></a></span>
+                    <a class="general_nav_category signin-a-home" href="{{ path('fos_user_security_login') }}"><span class="glyphicon glyphicon-user"></span></a>
                 {% endif %}
             </div>
+
+    <div class="col-xs-3 general_nav general_nav-select navbar-collapse">
+        <span class="general_nav_category contact"><a href="{{ path('bb_contact') }}"><strong>CONTACT</strong></a></span>
+        <select class="general_nav_category select-archives form-control" id="dates_select" onchange="location = this.value">
+            <option value="#">Archives...</option>
+            <option value="{{ path('bb_homepage') }}">Tout</option>
+            {% for key,dt in dates %}
+                <option value="{{ path('bb_draws_date', {date: dt['date']}) }}">{{ dt['date'] | localizeddate('none', 'none', null, null, "MMMM Y") }} ({{ dt[1] }})</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="modal" id="bs-example-navbar-collapse-1" tabindex="-1" role="dialog">
+        <button class="dismiss-min-nav" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>
+        <a class="general_nav_category" href="{{ path('bb_doodle') }}"><strong style="font-family: 'Marker Felt'">DOODLES</strong></a>
+        <a class="general_nav_category" href="{{ path('bb_satire') }}"><strong style="font-family: 'Marker Felt'">CARICATURES</strong></a>
+        <a class="general_nav_category" href="{{ path('bb_illustrations') }}"><strong style="font-family: 'Marker Felt'">ILLUSTRATIONS</strong></a>
+        <a class="general_nav_category" href="{{ path('bb_painter') }}"><span><i class="fa fa-paint-brush"></i></span></a>
+    </div>
+    </nav>
+
+    <div class="row single_post_row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="row single_post_row">
+        <div class="col-sm-12 pg-zero">
+            <a href="{{ path('bb_homepage') }}"><img class="img-thumbnail ban_image" src="{{ asset('bundles/bb/ban/banKainkain.png') }}" alt="banniere"></a>
         </div>
     </div>
-    {#les articles et boucle foreach #}
+    {% block draws %}
+    {% if nbPage > 0 %}
+        <div class="row single_post_row">
+            <div class="col-sm-12 pg-zero">
+                <div class="row pages">
+                    <div class="col-sm-12 text-center div_ul">
+                    <ul class="pagination">
+                        {% if page > 1 %}
+                            <li><a href="{{ path('bb_homepage', {'page': 1}) }}"><<</a></li>
+                            <li><a href="{{ path('bb_homepage', {'page': page-1}) }}"><</a></li>
+                        {% endif %}
+                        {% for pg in range(1,nbPage) %}
+                            <li {% if pg == page %}class="active"{% endif %}>
+                                <a href="{{ path('bb_homepage', {'page': pg}) }}">
+                                    {{ pg }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        {% if page < nbPage %}
+                            <li><a href="{{ path('bb_homepage', {'page': page+1}) }}">></a></li>
+                            <li><a href="{{ path('bb_homepage', {'page':  nbPage }) }}">>></a></li>
+                        {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 
-    {% for dra in draws | reverse %}
-        <div class="row">
-            <div class="col-sm-12">
+    {% for dra in draws %}
+        <div class="row single_post_row">
+            <div class="col-sm-12 pg-zero">
                 <div class="navbar  menuart navbar-inverse" role="navigation">
-                    {{ dra.title }}
+                    <p>{{ dra.title }}</p>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row single_post_row">
+            <div class="col-sm-12 pg-zero">
                 <div class="well barrart well-sm elements_post">
-                    {#{% include '@BB/Default/Partials/coeur.html.twig' %}#}
-                    <a data-id="{{ dra.id }}" data-pouce="{{ dra.pouces }}" class="glyphicon glyphicon-thumbs-up coeur" href="{{ path('bb_pouces_up',{'id':dra.id}) }}"></a>
-                    {#{% include '@BB/Default/Partials/thumbs.html.twig' %}#}
+                    <a data-id="{{ dra.id }}" data-pouce="{{ dra.pouces }}" class="glyphicon glyphicon-heart coeur" href="{{ path('bb_pouces_up',{'id':dra.id}) }}"></a>
                     <span data-id="{{ dra.id }}" class="countPouces"></span>
-                    <span class="created_at">{{ dra.createdAt | date('d/m/Y H:m') }}</span>
-                    <a class="glyphicon glyphicon-comment com " href="{{ path('bb_singlepost',{'id':dra.id}) }}"
-                       title="avec .fadeIn si possible"></a>
+                    <span class="created_at">{{ dra.createdAt | localizeddate('none', 'none', null, null, "d MMMM Y") }}</span>
+                    <a class="glyphicon glyphicon-comment com " href="{{ path('bb_singlepost',{'id':dra.id}) }}"></a>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
+        <div class="row single_post_row">
+            <div class="col-sm-12 pg-zero">
+
                 {% if dra.picture is empty %}
                     <div class="descr">
                         <p>{{ dra.description }}</p>
@@ -65,22 +116,46 @@
                 {% for pic in dra.picture %}
                     <a href="{{ path('bb_singlepost',{'id':dra.id}) }}"><img title="{{ dra.description }}"
                                                                              class="img-thumbnail post"
-                                                                             src="/{{ pic.dPath }}" alt="dessin"></a>
+                                                                             src="../{{ pic.dPath }}" alt="dessin"></a>
                 {% endfor %}
-
             </div>
-
-
         </div>
     {% endfor %}
 
+    {% if nbPage > 0 %}
+    <div class="row single_post_row">
+        <div class="col-sm-12 text-center pg-zero">
+            <div class="row pages">
+                <div class="col-sm-12 text-center div_ul">
+                    <ul class="pagination">
+                        {% if page > 1 %}
+                        <li><a href="{{ path('bb_homepage', {'page': 1}) }}"><<</a></li>
+                        <li><a href="{{ path('bb_homepage', {'page': page-1}) }}"><</a></li>
+                        {% endif %}
+                        {% for pg in range(1,nbPage) %}
+                            <li {% if pg == page %}class="active"{% endif %}>
+                                <a href="{{ path('bb_homepage', {'page': pg}) }}">
+                                    {{ pg }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        {% if page < nbPage %}
+                        <li><a href="{{ path('bb_homepage', {'page': page+1}) }}">></a></li>
+                        <li><a href="{{ path('bb_homepage', {'page':  nbPage }) }}">>></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock draws %}
+
     <div id="toTop"></div>
-
-
 
     <footer class="footer">
         <div class="container">
-            {#<p class="text-muted">Place sticky footer content here.</p>#}
+            <p class="pull-right">Merci de ne pas utiliser les images de ce site sans mon accord.</p>
         </div>
     </footer>
 {% endblock n3 %}

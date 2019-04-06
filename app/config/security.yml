@@ -13,15 +13,12 @@ security:
 
     firewalls:
         main:
+#            logout_on_user_change:  true
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                always_use_default_target_path: true
-                default_target_path: /admin/create
-                failure_path: bb_homepage
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
+                default_target_path: bb_admin_create
 
             logout:       true
             anonymous:    true

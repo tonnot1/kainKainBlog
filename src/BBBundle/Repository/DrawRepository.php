@@ -3,6 +3,7 @@
 namespace BBBundle\Repository;
 
 use BBBundle\Entity\Draw;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * DrawRepository
@@ -12,24 +13,51 @@ use BBBundle\Entity\Draw;
  */
 class DrawRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findDrawByPost(){
+    public function findDrawByPost($page, $max)
+    {
+        $q = $this->createQueryBuilder('d')
+            ->select('d')
+            ->addSelect('p')
+            ->leftJoin('d.picture', 'p')
+            ->where('d.category = 1')
+            ->orWhere('d.category = 3')
+            ->orderBy('d.id', 'desc');
 
+        $firstDraw = ($page - 1) * $max;
+        $query = $q->getQuery()
+            ->setFirstResult($firstDraw)
+            ->setMaxResults($max);
+        $paginate = new Paginator($query);
 
-        $q = $this->getEntityManager()
-            ->createQuery("select d from BBBundle:Draw d where d.category = '1' ORDER BY d.createdAt");
+        if (($paginate->count() <= $firstDraw) && $page != 1) {
+            throw new \Exception('La page demandée n\'existe pas.', '11'); // page 404, sauf pour la première page
+        }
+        return $paginate;
+    }
 
-        return $q->getResult();
+    public function findDates()
+    {
+        $q = $this->createQueryBuilder('d')
+            ->select('count(d)')
+            ->addSelect('SUBSTRING(d.createdAt, 1, 7) as date')
+            ->groupBy('date')
+            ->where('d.category = 1')
+            ->orWhere('d.category = 3')
+            ->orderBy('date', 'desc');
+        return $q->getQuery()
+            ->getResult();
+    }
 
-
-        /*$q = $this->createQueryBuilder('draw')
-            ->where('draw.category = :post')
-            ->join('draw.category', 'category')
-            ->join('draw.picture','picture')
-//            ->setParameter('post',$category)
-            ->addSelect('category', 'picture');*/
-
-//        return $q->getQuery()->getResult();
-
+    public function findByDate($date)
+    {
+        $q = $this->createQueryBuilder('d')
+            ->where('d.category = 1')
+            ->orWhere('d.category = 3')
+            ->andWhere('SUBSTRING(d.createdAt, 1, 7) = :date')
+            ->setParameter('date', $date)
+            ->orderBy('d.createdAt', 'desc');
+        return $q->getQuery()
+            ->getResult();
     }
 
     public function findDCommentsNotAllowed()
@@ -39,14 +67,16 @@ class DrawRepository extends \Doctrine\ORM\EntityRepository
         return $q->getResult();
     }
 
-    public function findDrawByDoodle(){
+    public function findDrawByDoodle()
+    {
         $q = $this->getEntityManager()
             ->createQuery("select d,c from BBBundle:Draw d where d.category = '2' ORDER BY d.createdAt DESC ");
 
         return $q->getResult();
     }
 
-    public function increasePouces(){
+    public function increasePouces()
+    {
 
         $q = $this->getEntityManager()
             ->createQuery("update BBBundle:Draw d set d.pouces = d.pouces + 1 ");
@@ -54,7 +84,8 @@ class DrawRepository extends \Doctrine\ORM\EntityRepository
         return $q->getResult();
     }
 
-    public function findPouces(Draw $draw){
+    public function findPouces(Draw $draw)
+    {
 
         return $this->createQueryBuilder('d')
             ->select('d.pouces')

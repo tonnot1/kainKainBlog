@@ -1,0 +1,25 @@
+{% extends '::n1.html.twig' %}
+{% block n3 %}
+
+<div class="row single_post_row">
+    <div class="col-sm-12 welle">
+        <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage' )}}"></a>
+    </div>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+<div class="row single_post_row">
+    <h2 class="text-center">Formulaie de validation du code gagnant</h2>
+    <div class="col-sm-12 winner_validation_form">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{% endblock n3 %}

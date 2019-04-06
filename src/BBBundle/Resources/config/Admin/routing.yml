@@ -1,10 +1,22 @@
-bb_admin_homepage:
-    path:     /
-    defaults: { _controller: BBBundle:Admin:indexAdmin }
+#bb_admin_homepage:
+#    path:     /
+#    defaults: { _controller: BBBundle:Admin:indexAdmin }
 
 bb_admin_create:
     path:     /create
     defaults: { _controller: BBBundle:Admin:publish }
+
+bb_admin_edit:
+    path:     /edit/{id}
+    defaults: { _controller: BBBundle:Admin:edit}
+    requirements:
+      id: \d+
+
+bb_admin_remove:
+    path:     /remove/{id}
+    defaults: { _controller: BBBundle:Admin:remove}
+    requirements:
+      id: \d+
 
 bb_admin_allow:
     path:     /push/online/{id}

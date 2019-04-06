@@ -1,60 +1,53 @@
-{% extends 'BBBundle::n2.html.twig' %}
-{% block n3 %}
+{% extends '::n1.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/bb/css/doodle.css') }}">
+{% endblock stylesheets %}
+{% block doodle %}
 
-    <div class="gogo"></div>
+<div>
+    <div class="row single_post_row">
+        <div class="col-sm-12 nav_single">
+            <div class="welle">
+                <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
+                <h2 class="pull-right doo_title">GALLERIE DE DOODLES</h2>
+            </div>
+        </div>
+    </div>
 
-    <div class="row doodle_haut_page"></div>
+    <div class="row doodle_haut_page single_post_row_doodle"></div>
 
-    <div class="row">
-<div class="col-xs-1"></div>
-<div class="col-xs-10">
-    <div class="grid text-center">
-
-    {#<div class="grid-sizer"></div>#}
+    <div class="row single_post_row_doodle">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+        <div class="grid text-center">
     {% for doo in draw %}
         {% for pic in doo.picture %}
-    <div class="grid-item">
-        <img src="/{{ pic.dPath }}" alt="doodle">
-    </div>
+            <div class="grid-item " role="dialog" data-toggle="modal" data-target="#myModal{{ doo.id }}">
+                <img src="../{{ pic.dPath }}" alt="doodle">
+                <div class="doodle_title_bandeau "><span>{{ doo.title }}</span>
+                    <span data-id="{{ doo.id }}" data-pouce="{{ doo.pouces }}" class="glyphicon glyphicon-heart coeur pull-right"></span>
+                    <span data-id="{{ doo.id }}" class="countPouces countPouces{{ doo.id }} pull-right">{{ doo.pouces }}</span>
+                </div>
+            </div>
+
+    <!-- Modal -->
+            <div class="doodle-img-modal modal" id="myModal{{ doo.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <img src="../{{ pic.dPath }}" alt="doodle">
+                        <a data-id="{{ doo.id }}" data-pouce="{{ doo.pouces }}" class="fa fa-heart coeur" href="{{ path('bb_pouces_up',{'id':doo.id}) }}"></a>
+                    </div>
+                </div>
+            </div>
          {% endfor %}
      {% endfor %}
 
-
-    <div class="grid-item grid-item--width2 grid-item--height0"></div>
-    <div class="grid-item grid-item--height2">
-        <img src="{{ asset('bundles/bb/postimage/Starry.jpg') }}" alt="doodle">
+        </div>
+        </div>
+    <div class="col-xs-1"></div>
     </div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height0"></div>
-    <div class="grid-item grid-item--width2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height0"></div>
-    <div class="grid-item grid-item--height2 "></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--width2 grid-item--height0"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2">
-        <img src="{{ asset('bundles/bb/postimage/The-Birth-of-Venus-Painting.jpg') }}" alt="doodle">
-    </div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item grid-item--height0"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--width2 grid-item--height0"></div>
-    <div class="grid-item grid-item--width2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item grid-item--height0"></div>
-    <div class="grid-item"></div>
 
 </div>
-</div>
-<div class="col-xs-1"></div>
-</div>
 
-
-
-{% endblock n3 %}
+{% endblock doodle %}

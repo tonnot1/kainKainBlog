@@ -21,3 +21,6 @@ services:
             class: Twig_Extensions_Extension_Intl
             tags:
                 - { name: twig.extension }
+
+    App\UserBundle\Entity\User:
+            class: BBBundle\Entity\Ad

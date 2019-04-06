@@ -1,23 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <div class="well well-lg">
-            <a class="glyphicon glyphicon-arrow-left" href="{{ path('bb_homepage')}}"></a>
-            <a class="btn btn-danger pull-right" href="{{ path('fos_user_security_logout') }}">Sortir</a>
-
-        </div>
+<div class="row single_post_row">
+    <div class="col-sm-12 welle">
+            <a class="glyphicon glyphicon-chevron-left back" href="{{ path('bb_homepage')}}"></a>
     </div>
 </div>
 
-
-
-
-
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <div class="signin_space">
-
-            <div class="col-xs-6 col-xs-offset-3">
+<div class="row single_post_row">
+    <div class="col-sm-12 signin_space spp">
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
@@ -36,7 +25,7 @@
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label class="checkbox-inline" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    <input class="pull-right" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
 </form>
 
             </div>

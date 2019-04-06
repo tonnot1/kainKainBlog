@@ -1,0 +1,53 @@
+body{
+    background-color: #ebebeb;
+}
+div.paint_canvas{
+    border: solid 1px black;
+    height: 70vh;
+    overflow: hidden!important;
+    background-color: white;
+    /*cursor: crosshair;*/
+    position: relative;
+}
+
+.painter_features{
+    text-align: center;
+}
+
+.painter_features .controls, .painter_features .form, .painter_features .opac{
+    display: inline-block;
+}
+/*.erase{*/
+    /*cursor:url("../img/eraser.png"), pointer;*/
+/*}*/
+/*.spay{*/
+    /*cursor:url("../img/spray.png"),pointer;*/
+/*}*/
+
+.outil_selected {
+    background-color: #f0ad4e;
+}
+
+.single_post_row_doodle {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.doo_title{
+    color: #dadada;
+    margin: 0 30px 0 0;
+    line-height: 40px;
+    font-size: 8px;
+}
+
+.painter-dialog {
+    width: 90vw;
+}
+
+.painter-dialog .modal-content{
+    border-radius: 0;
+}
+
+.modal-content.modal-painter {
+    width: 90vw;
+}

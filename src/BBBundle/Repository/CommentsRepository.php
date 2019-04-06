@@ -19,10 +19,21 @@ class CommentsRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
-    public function findCommentsAllowed($drawid)
+    public function findCommentsAllowed($drawId)
     {
         $q = $this->getEntityManager()
-            ->createQuery('select c,d from BBBundle:Comments c INNER JOIN c.draw d WHERE c.isAllowed=1 AND c.draw = :drawid ORDER BY c.createdAt DESC ')->setParameter('drawid',$drawid);
-        return $q->getResult();
+            ->createQuery('select c,d from BBBundle:Comments c INNER JOIN c.draw d WHERE c.isAllowed=1 AND c.draw = :drawid ORDER BY c.createdAt DESC ')->setParameter('drawid',$drawId);
+        return $q->getScalarResult();
+    }
+
+    public function countCommentsAllowed($drawId){
+        $q = $this->createQueryBuilder('c');
+        $q->select('count(c.id)')
+            ->join('c.draw', 'd')
+            ->where('c.isAllowed = 1')
+            ->andWhere('d.id = :count')
+            ->setParameter('count', $drawId);
+        return  $q->getQuery()
+            ->getSingleScalarResult();
     }
 }
